@@ -1,0 +1,24 @@
+{
+  "name": "basuzo",
+  "version": "1.0.0",
+  "description": "Basuzo is multipurpose discord bot. Coded in JavaScript, Basuzo hopes to bring commands and services to your discord.",
+  "main": "app.js",
+  "author": "Aezux",
+  "repository": "https://github.com/Aezux/Basuzo",
+  "license": "MIT",
+  "dependencies": {
+    "bufferutil": "^3.0.2",
+    "chance": "^1.0.11",
+    "d20": "^1.4.1",
+    "discord.js": "^11.1.0",
+    "google": "^2.1.0",
+    "horoscope": "^2.0.1",
+    "moment": "^2.18.1",
+    "ms": "^2.0.0",
+    "password": "^0.1.1",
+    "random-js": "^1.0.8",
+    "random-puppy": "^1.1.0",
+    "return-deep-diff": "^0.2.7",
+    "urban": "^0.3.1"
+  }
+}
