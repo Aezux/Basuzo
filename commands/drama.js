@@ -1,5 +1,5 @@
+const random = require('../rng.js');
 exports.run = (client, message) => {
-    var random = require("random-js")();
     var gif = [
         "http://i.imgur.com/IwJnS7s.gif",
         "http://i.imgur.com/2QBVNEy.gif",
@@ -28,9 +28,9 @@ exports.run = (client, message) => {
         "http://i.imgur.com/lj1UGpj.gif",
         "http://i.imgur.com/jqr2gUM.gif"
     ];
-    var rng = random.integer(0, gif.length-1);
+    var rng = random.rng(0, gif.length-1);
     message.channel.send({ embed: {
-            color: 0xb2ec5d,
+            color: 0xffffff,
             footer: {
               text: "Gif " + (rng + 1) + " : " + (gif.length).toString()
             },

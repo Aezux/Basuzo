@@ -1,5 +1,6 @@
+const random = require('../rng.js');
 exports.run = (client, message) => {
-    let rng = Math.floor(Math.random() * 2);
+    var rng = random.rng(0, 1);
     if (rng === 0) message.channel.send("", {
         file: "./images/Heads.png"
     });

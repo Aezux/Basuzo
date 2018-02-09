@@ -1,5 +1,5 @@
+const random = require('../rng.js');
 exports.run = (client, message, args) => {
-    var random = require("random-js")();
     let question = args.join(" ");
     if (!question) return message.reply("I mean I can shake this 8ball all I want but without a question it's kinda dumb.")
     var answers = [
@@ -28,7 +28,7 @@ exports.run = (client, message, args) => {
         "Possibly.",
         "There is a small chance."
     ]
-    var rng = random.integer(0, answers.length-1);
+    var rng = random.rng(0, answers.length-1);
     var answer = answers[rng];
     message.channel.send("🎱 The Magic 8 Ball says: **" + answer + "** 🎱")
 };

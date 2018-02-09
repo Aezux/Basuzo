@@ -1,5 +1,5 @@
+const random = require('../rng.js');
 exports.run = (client, message) => {
-    var random = require("random-js")();
     var gif = [
         "https://68.media.tumblr.com/a9c341810735ba9939722e5abd2c66eb/tumblr_nmma081WG81rs4yfmo1_500.gif",
         "https://wolfesramblings.files.wordpress.com/2016/08/illya4.gif",
@@ -8,9 +8,9 @@ exports.run = (client, message) => {
         "http://gif-finder.com/wp-content/uploads/2015/07/Anime-girl-crying.gif",
         "https://media.tenor.com/images/15dd673b469356e2129a0be61c81c3e1/tenor.gif"
     ];
-    var rng = random.integer(0, gif.length-1);
+    var rng = random.rng(0, gif.length-1);
     message.channel.send({ embed: {
-            color: 0xb2ec5d,
+            color: 0xffffff,
             footer: {
               text: "Gif " + (rng + 1) + " : " + (gif.length).toString()
             },
