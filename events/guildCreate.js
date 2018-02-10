@@ -1,5 +1,6 @@
 const settings = require("../settings.json");
 const stamp = require('../timeStamp.js');
+const database = require('../database.js');
 module.exports = guild => {
     let audit = guild.channels.find("name", "audit-log");
     let main = guild.channels.first();
@@ -13,4 +14,7 @@ module.exports = guild => {
         })
     }
     else guild.channels.get(audit.id).send(`:trident: ${stamp.time()} **All server changes will be logged here**.`);
+
+    database.create(guild.name);
+    database.populate(guild.members.array(), guild.name);
 };

@@ -1,10 +1,16 @@
 const stamp = require('../timeStamp.js');
+const database = require('../database.js');
 module.exports = member => {
+    var newMember = [member];
     let guild = member.guild;
     let main = guild.channels.first();
     let welcome = guild.channels.find("name", "welcome");
     let audit = guild.channels.find("name", "audit-log");
     let squad = guild.roles.find("name", "⚡ SQUAD");
+    
+    database.newUser(member, member.guild.name);
+    database.populate(newMember);
+
     if (welcome !== null) {
         main.send(`:small_blue_diamond: Lets all welcome **${member.user.username}** to ${guild.name}!` + " Please check out " + "<#" + welcome.id + ">" + " for information about the channel.");
     }
