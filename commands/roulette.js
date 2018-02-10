@@ -13,7 +13,13 @@ exports.run = (client, message) => {
         })
         message.guild.members.find('id', `${message.author.id}`).kick("BAKA! That's what you get for playing roulette.");
     } else {
-        message.reply("Safe for now.");
+        message.reply("Safe for now.")
+        .then(() => {
+            let botMsg = message.guild.members.find('id', settings.botid).lastMessage;
+            var emote = message.client.guilds.find("name", "Volt").emojis.find("name", "Dab");
+            botMsg.react(`${emote.id}`);
+        })
+
     } if (kicked) {
         message.channel.send("You lose.");
         main.createInvite()
