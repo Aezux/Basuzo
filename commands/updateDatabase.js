@@ -1,11 +1,6 @@
 const database = require('../database.js');
 exports.run = (client, message) => {
-    var guildArray = client.guilds.array();
-    for (var i=0; i<guildArray.length; ++i) {
-        var name = guildArray[i].name;
-        database.create(name);
-        database.populate(guildArray[i].members.array(), name);
-    }
+    database.populate(message.guild.members.array(), message.guild.name);
 }
 
 exports.conf = {

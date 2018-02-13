@@ -3,7 +3,5 @@ settings.json
 package-lock.json
 app.js
 timeStamp.js
-commands/lol.js
 rng.js
-commands/test.js
 database.js
