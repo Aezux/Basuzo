@@ -1,27 +1,38 @@
-const Discord = require("discord.js");
 
-function setCharAt(str, index, chr) {
-    if(index > str.length-1) return str;
-    return str.substr(0,index) + chr + str.substr(index+1);
-}
+        //888888b.
+        //888  "88b                           Adrian Hyc
+        //888  .88P
+        //8888888K.   8888b.  .d8888b  888  888 88888888  .d88b.
+        //888  "Y88b     "88b 88K      888  888    d88P  d88""88b
+        //888    888 .d888888 "Y8888b. 888  888   d88P   888  888
+        //888   d88P 888  888      X88 Y88b 888  d88P    Y88..88P
+/**     //8888888P"  "Y888888  88888P'  "Y88888 88888888  "Y88P"
+ * 
+ * This command mocks another user.
+ */
 
-function randUpper(string) {
-    var random = require("random-js")();
-    string = string.toLowerCase();
-    let size = string.length;
-    for (i=0; i<size; i++) {
-        let rng = random.integer(0, 1);
-        if (rng === 0) string = setCharAt(string, i, string[i].toUpperCase());
-    }
-    return string;
-}
-
+const random = require("../rng.js");
 exports.run = (client, message) => {
-    let user = message.mentions.users.first();
-    if(message.author.id === user.id) return message.reply("Why are you trying to mock yourself?");
-    let userMessage = user.lastMessage.cleanContent;
-    let mock = randUpper(userMessage);
-    message.channel.send(mock);
+
+    /* Checks if the message sender is mocking themselves */
+    var user = message.mentions.users.first();
+    if(message.author.id === user.id) {
+        return message.reply("Why are you trying to mock yourself?");
+    }
+
+    /* Gets the last message and converts it to lower case */
+    var string = user.lastMessage.cleanContent.toLowerCase();
+
+    /* Go through the string and change letters to uppercase randomly */
+    for (var i = 0; i < string.length; ++i) {
+        var rng = random.rng(0, 1);
+        if (rng === 0) {
+            string.substr(0, i) + string[i].toUpperCase() + string.substr(i + 1);
+        }
+    }
+
+    /* Returns the final string result */
+    message.channel.send(string);
 }
 
 exports.conf = {
