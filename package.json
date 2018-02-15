@@ -1,6 +1,6 @@
 {
   "name": "basuzo",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Basuzo is a moderation bot that is coded in JavaScript.",
   "main": "app.js",
   "author": "Aezux",
