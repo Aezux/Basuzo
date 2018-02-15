@@ -23,7 +23,7 @@ exports.run = (client, message, args) => {
     }
 
     /* Creates the culture object */
-    var obj = cultures(type);
+    var obj = cultures.getCulture(type);
     var Name = obj.name;
     var Color = obj.color;
 
@@ -33,7 +33,7 @@ exports.run = (client, message, args) => {
     }
     
     /* Sends the culture result to the channel */
-    const event = randomPuppy.all(name);
+    const event = randomPuppy.all(Name);
     event.once('data', url => message.channel.send({
             embed: {
                 color: Color,

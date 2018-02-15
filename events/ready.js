@@ -18,6 +18,6 @@ module.exports = client => {
     console.log("I'm online fam");
 
     /* Sets the game that the bot is playing */
-    client.user.setPresence({ game: { name: `詳細については、${settings.prefix}helpを入力してください`, type: 0 } });
+    client.user.setPresence({ game: { name: `〜help：すべてのコマンドを表示する`, type: 0 } });
 
 };
