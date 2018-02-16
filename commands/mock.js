@@ -21,18 +21,21 @@ exports.run = (client, message) => {
     }
 
     /* Gets the last message and converts it to lower case */
-    var string = user.lastMessage.cleanContent.toLowerCase();
+    var string = user.lastMessage.cleanContent.toLowerCase().split("");
 
-    /* Go through the string and change letters to uppercase randomly */
+    /* Go through the string array and change letters to uppercase randomly */
     for (var i = 0; i < string.length; ++i) {
         var rng = random.rng(0, 1);
         if (rng === 0) {
-            string.substr(0, i) + string[i].toUpperCase() + string.substr(i + 1);
+            string[i] = string[i].toUpperCase();
         }
     }
+    
+    /* Combine the array into a string */
+    var newWord = string.join("");
 
     /* Returns the final string result */
-    message.channel.send(string);
+    message.channel.send(newWord);
 }
 
 exports.conf = {
