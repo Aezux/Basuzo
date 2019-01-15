@@ -1,6 +1,7 @@
 package main.java.commands;
 
-import net.dv8tion.jda.core.entities.MessageChannel;
+import main.java.util.Embed;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Ping implements Runnable {
@@ -12,11 +13,11 @@ public class Ping implements Runnable {
 
 	@Override
 	public void run() {
-		MessageChannel channel = event.getChannel();
 		String ping = new StringBuilder("Ping: `")
 				.append(Long.toString(event.getJDA().getPing()))
 				.append(" ms`").toString();
-		channel.sendMessage(ping).queue();
+		MessageEmbed success = Embed.getInstance().success(ping);
+		event.getChannel().sendMessage(success).queue();
 	}
 
 }

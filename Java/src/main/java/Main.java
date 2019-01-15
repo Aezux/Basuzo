@@ -14,9 +14,7 @@ public class Main {
 		
 		try {
 			bot = new JDABuilder(token).build();
-			System.out.println("Login Succesful!");
 		} catch (LoginException e) {
-			System.out.println("Login Error!");
 			e.printStackTrace();
 		} finally {
 			if (bot == null) return;
