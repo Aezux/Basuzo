@@ -27,6 +27,9 @@ public class BotEventListener extends ListenerAdapter{
 				case "roulette": thread = new Thread(new Roulette(event)); break;
 				case "coin": thread = new Thread(new Coin(event)); break;
 				case "poll": thread = new Thread(new Poll(event)); break;
+				case "8ball": thread = new Thread(new EightBall(event)); break;
+				case "mute": thread = new Thread(new Mute(event)); break;
+				case "lock": thread = new Thread(new Lock(event)); break;
 				default: thread = null;
 			}
 			

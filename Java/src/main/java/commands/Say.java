@@ -16,6 +16,14 @@ public class Say implements Runnable {
 	public void run() {
 		MessageEmbed embed;
 		String msg;
+		
+		if (event.getMessage().getContentRaw().length() == 4) {
+			msg = new StringBuilder(event.getAuthor().getAsMention().toString())
+					.append(" you need to give me something to say!").toString();
+			MessageEmbed empty = Embed.getInstance().error(msg);
+			event.getChannel().sendMessage(empty).complete();
+			return;
+		}
 
 		if (event.getGuild().getMemberById(event.getAuthor().getId()).hasPermission(Permission.MESSAGE_MANAGE)) {
 			event.getMessage().delete().queue();

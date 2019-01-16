@@ -15,6 +15,15 @@ public class Poll implements Runnable {
 
 	@Override
 	public void run() {
+		
+		if (event.getMessage().getContentRaw().length() == 5) {
+			String msg = new StringBuilder(event.getAuthor().getAsMention().toString())
+					.append(" you need to give me something to poll!").toString();
+			MessageEmbed empty = Embed.getInstance().error(msg);
+			event.getChannel().sendMessage(empty).complete();
+			return;
+		}
+		
 		String question = event.getMessage().getContentRaw().substring(6);
 		if (question.charAt(question.length()-1) != '?') {
 			question += "?";

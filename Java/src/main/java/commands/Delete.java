@@ -19,6 +19,14 @@ public class Delete implements Runnable {
 	public void run() {
 		int deleteAmount = 0;
 		
+		if (event.getMessage().getContentRaw().length() == 7) {
+			String msg = new StringBuilder(event.getAuthor().getAsMention().toString())
+					.append(" you need to tell me how much to delete!").toString();
+			MessageEmbed empty = Embed.getInstance().error(msg);
+			event.getChannel().sendMessage(empty).complete();
+			return;
+		}
+		
 		if (event.getGuild().getMemberById(event.getAuthor().getId()).hasPermission(Permission.MESSAGE_MANAGE)) {
 
 			try {
