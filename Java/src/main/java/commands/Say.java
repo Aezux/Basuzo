@@ -27,7 +27,7 @@ public class Say implements Runnable {
 			embed = Embed.getInstance().error(msg);
 		}
 		
-		event.getChannel().sendMessage(embed).queue();
+		event.getChannel().sendMessage(embed).complete();
 
 	}
 

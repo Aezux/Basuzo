@@ -29,13 +29,27 @@ public class Embed {
 		embed.setDescription(description);
 		return embed.build();
 	}
+	
+	public MessageEmbed warning(String description) {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setColor(new Color(225, 234, 0));
+		embed.setDescription(description);
+		return embed.build();
+	}
+	
+	public MessageEmbed status(String description) {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setColor(new Color(170, 0, 255));
+		embed.setDescription(description);
+		return embed.build();
+	}
+	
+	public MessageEmbed picture(String url) {
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setColor(new Color(0, 255, 170));
+		embed.setImage(url);
+		return embed.build();
+	}
 
 }
-
-
-
-
-	
-	
-
 	

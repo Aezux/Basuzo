@@ -17,7 +17,7 @@ public class Ping implements Runnable {
 				.append(Long.toString(event.getJDA().getPing()))
 				.append(" ms`").toString();
 		MessageEmbed success = Embed.getInstance().success(ping);
-		event.getChannel().sendMessage(success).queue();
+		event.getChannel().sendMessage(success).complete();
 	}
 
 }

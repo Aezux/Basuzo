@@ -28,7 +28,7 @@ public class Delete implements Runnable {
 						.append(" you need to correctly enter a number").toString();
 				
 				MessageEmbed error = Embed.getInstance().error(errorDesc);
-				event.getChannel().sendMessage(error).queue();
+				event.getChannel().sendMessage(error).complete();
 				return;
 			}
 			
@@ -40,7 +40,7 @@ public class Delete implements Runnable {
 			String msg = new StringBuilder(event.getAuthor().getAsMention().toString())
 					.append(" you don't have the permission to use that command").toString();			
 			MessageEmbed error = Embed.getInstance().error(msg);
-			event.getChannel().sendMessage(error).queue();
+			event.getChannel().sendMessage(error).complete();
 		}
 
 	}

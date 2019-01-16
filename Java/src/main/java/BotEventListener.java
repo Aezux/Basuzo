@@ -9,7 +9,8 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class BotEventListener extends ListenerAdapter{
 
 	public void onMessageReceived(MessageReceivedEvent event) {
-		if (event.getAuthor().isBot()) return;
+		if (event.getAuthor().isBot()) return; // Don't reply to bots
+		if (event.getGuild() == null) return; // Don't reply to private messages
 		
 		String msg = event.getMessage().getContentRaw();
 		Thread thread;
@@ -23,6 +24,7 @@ public class BotEventListener extends ListenerAdapter{
 				case "say": thread = new Thread(new Say(event)); break;
 				case "help": thread = new Thread(new Help(event)); break;
 				case "delete": thread = new Thread(new Delete(event)); break;
+				case "roulette": thread = new Thread(new Roulette(event)); break;
 				default: thread = null;
 			}
 			
