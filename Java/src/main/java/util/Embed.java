@@ -46,7 +46,7 @@ public class Embed {
 	
 	public MessageEmbed picture(String url) {
 		EmbedBuilder embed = new EmbedBuilder();
-		embed.setColor(new Color(0, 255, 170));
+		embed.setColor(new Color(255, 128, 0));
 		embed.setImage(url);
 		return embed.build();
 	}

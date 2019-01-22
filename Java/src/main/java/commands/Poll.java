@@ -18,7 +18,7 @@ public class Poll implements Runnable {
 		
 		if (event.getMessage().getContentRaw().length() == 5) {
 			String msg = new StringBuilder(event.getAuthor().getAsMention().toString())
-					.append(" you need to give me something to poll!").toString();
+					.append(" you need to give me something to poll.").toString();
 			MessageEmbed empty = Embed.getInstance().error(msg);
 			event.getChannel().sendMessage(empty).complete();
 			return;

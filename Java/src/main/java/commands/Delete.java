@@ -21,7 +21,7 @@ public class Delete implements Runnable {
 		
 		if (event.getMessage().getContentRaw().length() == 7) {
 			String msg = new StringBuilder(event.getAuthor().getAsMention().toString())
-					.append(" you need to tell me how much to delete!").toString();
+					.append(" you need to tell me how much to delete.").toString();
 			MessageEmbed empty = Embed.getInstance().error(msg);
 			event.getChannel().sendMessage(empty).complete();
 			return;
@@ -33,7 +33,7 @@ public class Delete implements Runnable {
 				deleteAmount = Integer.parseInt(event.getMessage().getContentRaw().substring(8));
 			} catch (NumberFormatException e) {
 				String errorDesc = new StringBuilder(event.getAuthor().getAsMention().toString())
-						.append(" you need to correctly enter a number").toString();
+						.append(" you need to correctly enter a number.").toString();
 				
 				MessageEmbed error = Embed.getInstance().error(errorDesc);
 				event.getChannel().sendMessage(error).complete();
@@ -46,7 +46,7 @@ public class Delete implements Runnable {
 		
 		} else {
 			String msg = new StringBuilder(event.getAuthor().getAsMention().toString())
-					.append(" you don't have the permission to use that command").toString();			
+					.append(" you don't have the permission to use that command.").toString();			
 			MessageEmbed error = Embed.getInstance().error(msg);
 			event.getChannel().sendMessage(error).complete();
 		}

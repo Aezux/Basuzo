@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>Aezux</groupId>
-    <artifactId>BasuzoRequiem</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>Basuzo</artifactId>
+    <version>3.0.0</version>
     <packaging>jar</packaging>
     <name>Requiem</name>
     <description>Discord Bot</description>
@@ -34,7 +34,12 @@
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>3.8.1_454</version>
-        </dependency>
+        </dependency> 
+        <dependency>
+    		<groupId>com.googlecode.json-simple</groupId>
+    		<artifactId>json-simple</artifactId>
+    		<version>1.1.1</version>
+		</dependency>
     </dependencies>
     
     <repositories>

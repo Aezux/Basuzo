@@ -29,7 +29,7 @@ public class Mute implements Runnable {
 		
 		if (mentioned.isEmpty()) {
 			String embedMsg = new StringBuilder(author)
-					.append(" you need to mention someone").toString();
+					.append(" you need to mention someone.").toString();
 			MessageEmbed embed = Embed.getInstance().error(embedMsg);
 			event.getChannel().sendMessage(embed).complete();
 			return;
@@ -45,7 +45,7 @@ public class Mute implements Runnable {
 		
 		if (roles.isEmpty()) {
 			String embedMsg = new StringBuilder(author)
-					.append(" you need to have a **mute** role for this to work").toString();
+					.append(" you need to have a **mute** role for this to work.").toString();
 			MessageEmbed embed = Embed.getInstance().error(embedMsg);
 			event.getChannel().sendMessage(embed).complete();
 			return;
@@ -55,7 +55,7 @@ public class Mute implements Runnable {
 			timePeriod = event.getMessage().getContentRaw().split(" ")[2];
 		} catch (Exception e) {
 			String embedMsg = new StringBuilder(author)
-					.append(" you need to set a time").toString();
+					.append(" you need to set a time.").toString();
 			MessageEmbed embed = Embed.getInstance().error(embedMsg);
 			event.getChannel().sendMessage(embed).complete();
 			return;
@@ -65,7 +65,7 @@ public class Mute implements Runnable {
 			number = Integer.parseInt(timePeriod.substring(0, timePeriod.length()-1));
 		} catch (Exception e) {
 			String embedMsg = new StringBuilder(author)
-					.append(" you need to enter a correct number").toString();
+					.append(" you need to enter a correct number.").toString();
 			MessageEmbed embed = Embed.getInstance().error(embedMsg);
 			event.getChannel().sendMessage(embed).complete();
 			return;
@@ -76,12 +76,17 @@ public class Mute implements Runnable {
 			case 's': number *= sec; break;
 			case 'm': number *= min; break;
 			case 'h': number *= hour; break;
-			default: event.getChannel().sendMessage("You need to enter a correct time").complete(); return;
+			default: 
+				String embedMsg = new StringBuilder(author)
+					.append(" You need to enter a correct time.").toString();
+				MessageEmbed embed = Embed.getInstance().error(embedMsg);
+				event.getChannel().sendMessage(embed).complete();
+				return;
 		}
 		
 		event.getGuild().getController().addSingleRoleToMember(mentioned.get(0), roles.get(0)).complete();
 		String muteMsg = new StringBuilder(mentioned.get(0).getAsMention())
-				.append(" has been muted").toString();
+				.append(" has been muted.").toString();
 		MessageEmbed muteEmbed = Embed.getInstance().status(muteMsg);
 		event.getChannel().sendMessage(muteEmbed).complete();
 		
@@ -94,7 +99,7 @@ public class Mute implements Runnable {
 		if (mentioned.get(0).getRoles().contains(roles.get(0))) {
 			event.getGuild().getController().removeSingleRoleFromMember(mentioned.get(0), roles.get(0)).complete();
 			String embedMsg = new StringBuilder(mentioned.get(0).getAsMention())
-					.append(" has been unmuted").toString();
+					.append(" has been unmuted.").toString();
 			MessageEmbed embed = Embed.getInstance().status(embedMsg);
 			event.getChannel().sendMessage(embed).complete();
 		}

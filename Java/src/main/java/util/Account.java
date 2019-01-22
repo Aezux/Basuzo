@@ -8,9 +8,9 @@ public class Account {
 	private String joeID;
 	private String prefix;
 	
-	private Account() { 
+	private Account() {
+		bannedWords = new String[] {};
 	    token = "";
-	    bannedWords = new String[] {};
 	    joeID = "";
 	    prefix = "";
 	} 
@@ -34,6 +34,14 @@ public class Account {
 	
 	public String[] getWords() {
 		return bannedWords;
+	}
+	
+	public String[] getCulture(String cultureType) {
+		String[] cultures;
+		switch (cultureType) {
+			default: cultures = null; break;
+		}
+        return cultures;
 	}
 	
 }

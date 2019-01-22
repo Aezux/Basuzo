@@ -19,7 +19,7 @@ public class Say implements Runnable {
 		
 		if (event.getMessage().getContentRaw().length() == 4) {
 			msg = new StringBuilder(event.getAuthor().getAsMention().toString())
-					.append(" you need to give me something to say!").toString();
+					.append(" you need to give me something to say.").toString();
 			MessageEmbed empty = Embed.getInstance().error(msg);
 			event.getChannel().sendMessage(empty).complete();
 			return;
@@ -31,7 +31,7 @@ public class Say implements Runnable {
 			embed = Embed.getInstance().success(msg);
 		} else {
 			msg = new StringBuilder(event.getAuthor().getAsMention().toString())
-					.append(" you don't have the permission to use that command").toString();
+					.append(" you don't have the permission to use that command.").toString();
 			embed = Embed.getInstance().error(msg);
 		}
 		
