@@ -1,12 +1,12 @@
 ![Preview](https://raw.githubusercontent.com/Aezux/Basuzo/master/images/banner.png)
 
 # Basuzo
-Basuzo is a multipurpose bot that is mainly for moderation. [Invite to your server here!](https://discordapp.com/oauth2/authorize?permissions=1544027352&scope=bot&client_id=336623511621861388)
+Basuzo is a multipurpose bot that is mainly for moderation. [Invite to your server here!](https://discordapp.com/api/oauth2/authorize?client_id=336623511621861388&permissions=2080767223&scope=bot)
 
 # Features
 * Users automatically get their roles back if they leave the server and come back
 * Automatically deletes messages that contain inappropriate words for the server
-* Lock out channels for a specific time
+* Mutes troublesome people
 * Culture appreciation
 
 # Feature Requests
