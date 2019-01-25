@@ -28,7 +28,6 @@ public class Roulette implements Runnable {
 		int result = RNG.getInstance().generateNumber(6);
 		
 		if (result == 0) {
-			
 			Invite invite = event.getGuild().getDefaultChannel().createInvite().complete();
 			PrivateChannel dm = event.getAuthor().openPrivateChannel().complete();
 			dm.sendMessage(invite.getURL()).complete();	

@@ -34,6 +34,7 @@ public class Poll implements Runnable {
 		Emote yes = event.getJDA().getGuildsByName("BotIcons", false).get(0).getEmotesByName("yes", true).get(0);
 		Emote no = event.getJDA().getGuildsByName("BotIcons", false).get(0).getEmotesByName("no", true).get(0);
 		
+		event.getMessage().delete().complete();
 		Message msg = event.getChannel().sendMessage(embed).complete();
 		msg.addReaction(yes).complete();
 		msg.addReaction(no).complete();

@@ -1,4 +1,6 @@
 
+import java.util.List;
+
 import commands.*;
 import util.Account;
 import util.Embed;
@@ -6,6 +8,7 @@ import util.WordDetection;
 import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
@@ -21,15 +24,21 @@ public class BotEventListener extends ListenerAdapter{
 	}
 
     /* Member joins the server */
-    public void onGuildMemberJoin(GuildMemberJoinEvent event) {
+    public void onGuildMemberJoin(GuildMemberJoinEvent event) {    	
     	String user = event.getUser().getName();
     	String guild = event.getGuild().getName();
     	String msg = new StringBuilder("Lets all welcome **")
     			.append(user).append("** to ").append(guild).toString();
     	
+    	List<TextChannel> general = event.getGuild().getTextChannelsByName("general", true);
     	Emote emote = event.getJDA().getGuildsByName("BotIcons", false).get(0).getEmotesByName("hello", true).get(0);
     	MessageEmbed embed = Embed.getInstance().status(msg);
-    	event.getGuild().getDefaultChannel().sendMessage(embed).complete()
+    	
+    	TextChannel channel;
+    	if (general.isEmpty()) channel = event.getGuild().getDefaultChannel();
+    	else channel = general.get(0);
+    	
+    	channel.sendMessage(embed).complete()
     		.addReaction(emote).complete();
     }
     
@@ -39,9 +48,15 @@ public class BotEventListener extends ListenerAdapter{
     	String msg = new StringBuilder("**")
     			.append(user).append("** is no longer part of this server").toString();
     	
+    	List<TextChannel> general = event.getGuild().getTextChannelsByName("general", true);
     	Emote emote = event.getJDA().getGuildsByName("BotIcons", false).get(0).getEmotesByName("respects", true).get(0);
     	MessageEmbed embed = Embed.getInstance().status(msg);
-    	event.getGuild().getDefaultChannel().sendMessage(embed).complete()
+    	
+    	TextChannel channel;
+    	if (general.isEmpty()) channel = event.getGuild().getDefaultChannel();
+    	else channel = general.get(0);
+    	
+    	channel.sendMessage(embed).complete()
     		.addReaction(emote).complete();
     }
     
