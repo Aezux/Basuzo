@@ -1,7 +1,7 @@
 
 import java.util.List;
-
 import commands.*;
+import database.*;
 import util.Account;
 import util.Embed;
 import util.WordDetection;
@@ -10,8 +10,11 @@ import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
+import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleAddEvent;
+import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleRemoveEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -22,9 +25,14 @@ public class BotEventListener extends ListenerAdapter{
 		Game game = Game.playing("~help: view commands!");
 		event.getJDA().getPresence().setGame(game);
 	}
+	
+	/* Bot joins the server */
+	public void onGuildJoin(GuildJoinEvent event) {
+		new Thread(new AddGuild(event)).start();
+	}
 
     /* Member joins the server */
-    public void onGuildMemberJoin(GuildMemberJoinEvent event) {    	
+    public void onGuildMemberJoin(GuildMemberJoinEvent event) {
     	String user = event.getUser().getName();
     	String guild = event.getGuild().getName();
     	String msg = new StringBuilder("Lets all welcome **")
@@ -40,6 +48,7 @@ public class BotEventListener extends ListenerAdapter{
     	
     	channel.sendMessage(embed).complete()
     		.addReaction(emote).complete();
+    	new Thread(new GiveRoles(event)).start();
     }
     
     /* Member leaves the server */
@@ -60,6 +69,17 @@ public class BotEventListener extends ListenerAdapter{
     		.addReaction(emote).complete();
     }
     
+    /* Member gets a role */
+    public void onGuildMemberRoleAdd(GuildMemberRoleAddEvent event) {
+    	new Thread(new AddRole(event)).start();
+    }
+    
+    /* Member loses a role */
+    public void onGuildMemberRoleRemove(GuildMemberRoleRemoveEvent event) {
+    	new Thread(new RemoveRole(event)).start();
+    }
+
+    /* Bot gets a message */
     public void onMessageReceived(MessageReceivedEvent event) {
 		if (event.getAuthor().isBot()) return; // Don't reply to bots
 		if (event.getGuild() == null) return; // Don't reply to private messages
@@ -76,13 +96,14 @@ public class BotEventListener extends ListenerAdapter{
 				case "coin": thread = new Thread(new Coin(event)); break;
 				case "culture": thread = new Thread(new Culture(event)); break;
 				case "delete": thread = new Thread(new Delete(event)); break;
+				case "database": thread = new Thread(new UpdateDatabase(event)); break;
 				case "help": thread = new Thread(new Help(event)); break;
 				case "invite": thread = new Thread(new Invite(event)); break;
 				case "mute": thread = new Thread(new Mute(event)); break;
 				case "poll": thread = new Thread(new Poll(event)); break;
 				case "ping": thread = new Thread(new Ping(event)); break;
 				case "roulette": thread = new Thread(new Roulette(event)); break;
-				case "say": thread = new Thread(new Say(event)); break;	
+				case "say": thread = new Thread(new Say(event)); break;
 				default: thread = null;
 			}
 			

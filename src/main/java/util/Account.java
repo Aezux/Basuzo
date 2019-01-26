@@ -7,10 +7,12 @@ public class Account {
 	private String token;
 	private String joeID;
 	private String prefix;
+	private String owner;
 	
 	private Account() {
 		bannedWords = new String[] {};
 	    token = "";
+		owner = "";
 	    joeID = "";
 	    prefix = "";
 	} 
@@ -28,7 +30,11 @@ public class Account {
 		return prefix;
 	}
 	
-	public String getID() {
+	public String getOwnerID() {
+		return owner;
+	}
+	
+	public String getJoeID() {
 		return joeID;
 	}
 	

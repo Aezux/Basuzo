@@ -53,7 +53,7 @@ public class WordDetection implements Runnable {
 			}
 		}
 
-		if (!detected && event.getAuthor().getId().equals(Account.getInstance().getID())) {
+		if (!detected && event.getAuthor().getId().equals(Account.getInstance().getJoeID())) {
 			Emote emote = event.getJDA().getGuildsByName("BotIcons", false).get(0).getEmotesByName("joe", true).get(0);
 			event.getMessage().addReaction(emote).complete();
 		}
