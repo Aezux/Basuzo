@@ -13,7 +13,7 @@ public class GiveRoles implements Runnable {
 	@Override
 	public void run() {
 		Database db = new Database();
-		String server = event.getGuild().getName().replaceAll(" ", "_");
+		String server = event.getGuild().getName().replaceAll("[^a-zA-Z0-9]+","");
 		String user = event.getMember().getUser().getId();
 		boolean userFound = db.findUser(server, user);
 		if (userFound) {

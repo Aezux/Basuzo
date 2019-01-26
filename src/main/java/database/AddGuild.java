@@ -15,7 +15,7 @@ public class AddGuild implements Runnable {
 	@Override
 	public void run() {
 		Database db = new Database();
-		String server = event.getGuild().getName().replaceAll(" ", "_");
+		String server = event.getGuild().getName().replaceAll("[^a-zA-Z0-9]+","");
 		boolean guildFound = db.findGuild(server);
 		if (!guildFound) db.createTable(server);
 

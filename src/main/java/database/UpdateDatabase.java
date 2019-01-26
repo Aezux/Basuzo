@@ -23,7 +23,7 @@ public class UpdateDatabase implements Runnable {
 		List<Guild> guilds = event.getJDA().getGuilds();
 		
 		for (Guild guild : guilds) {
-			String server = guild.getName().replaceAll(" ", "_");
+			String server = guild.getName().replaceAll("[^a-zA-Z0-9]+","");
 			boolean guildFound = db.findGuild(server);
 			if (!guildFound) db.createTable(server);
 			
