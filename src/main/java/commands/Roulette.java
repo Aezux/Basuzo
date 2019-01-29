@@ -2,6 +2,7 @@ package commands;
 
 import util.Embed;
 import util.RNG;
+import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.entities.Invite;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -36,14 +37,18 @@ public class Roulette implements Runnable {
 			Member member = event.getGuild().getMemberById(event.getAuthor().getId());
 			event.getGuild().getController().kick(member, "lost the game of roulette").complete();
 			
+			Emote emote = event.getJDA().getGuildsByName("BotIcons", false).get(0).getEmotesByName("loser", true).get(0);
 			String loseMsg = new StringBuilder(event.getAuthor().getAsMention()).append(" lost in the game of roulette!").toString();
 			MessageEmbed embed = Embed.getInstance().success(loseMsg);
-			event.getChannel().sendMessage(embed).complete();
+			event.getChannel().sendMessage(embed).complete()
+				.addReaction(emote).complete();
 			
 		} else {
+			Emote emote = event.getJDA().getGuildsByName("BotIcons", false).get(0).getEmotesByName("winner", true).get(0);
 			String winMsg = new StringBuilder(event.getAuthor().getAsMention()).append(" you are safe!").toString();
 			MessageEmbed embed = Embed.getInstance().success(winMsg);
-			event.getChannel().sendMessage(embed).complete();
+			event.getChannel().sendMessage(embed).complete()
+				.addReaction(emote).complete();
 		}
 
 	}
