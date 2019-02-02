@@ -5,7 +5,6 @@ public class Account {
 	private static Account instance = null;
 	private String[] bannedWords;
 	private String token;
-	private String joeID;
 	private String prefix;
 	private String owner;
 	
@@ -13,7 +12,6 @@ public class Account {
 		bannedWords = new String[] {};
 	    token = "";
 		owner = "";
-	    joeID = "";
 	    prefix = "";
 	} 
 	
@@ -32,10 +30,6 @@ public class Account {
 	
 	public String getOwnerID() {
 		return owner;
-	}
-	
-	public String getJoeID() {
-		return joeID;
 	}
 	
 	public String[] getWords() {

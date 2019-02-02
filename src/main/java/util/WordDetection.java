@@ -19,7 +19,6 @@ public class WordDetection implements Runnable {
 			return;
 		}
 		
-		boolean detected = false;
 		List<TextChannel> list = event.getGuild().getTextChannelsByName("admin_chat", true);
 		if (!list.isEmpty()) {
 			
@@ -47,15 +46,9 @@ public class WordDetection implements Runnable {
 					event.getChannel().sendMessage(channelEmbed).complete()
 						.addReaction(emote).complete();
 					adminChat.sendMessage(adminEmbed).complete();
-					detected = true;
 					break;
 				}
 			}
-		}
-
-		if (!detected && event.getAuthor().getId().equals(Account.getInstance().getJoeID())) {
-			Emote emote = event.getJDA().getGuildsByName("BotIcons", false).get(0).getEmotesByName("joe", true).get(0);
-			event.getMessage().addReaction(emote).complete();
 		}
 	}
 

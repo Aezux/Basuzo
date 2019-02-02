@@ -33,7 +33,7 @@ public class BotEventListener extends ListenerAdapter{
 
     /* Member joins the server */
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
-    	String user = event.getUser().getName();
+    	String user = event.getUser().getAsMention();
     	String guild = event.getGuild().getName();
     	String msg = new StringBuilder("Lets all welcome **")
     			.append(user).append("** to ").append(guild).toString();
@@ -53,7 +53,7 @@ public class BotEventListener extends ListenerAdapter{
     
     /* Member leaves the server */
     public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
-    	String user = event.getUser().getName();
+    	String user = event.getUser().getAsMention();
     	String msg = new StringBuilder("**")
     			.append(user).append("** is no longer part of this server").toString();
     	
