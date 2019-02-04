@@ -21,7 +21,7 @@ public class RNG {
 	
 	public int generateNumber(int maxRandom) {
 
-		int result = -1;
+		int result = 0;
 		String request = new StringBuilder("https://www.random.org/integers/?num=1&min=0&max=")
 			.append(Integer.toString(maxRandom)).append("&col=1&base=10&format=plain&rnd=new").toString();
 
@@ -32,7 +32,7 @@ public class RNG {
 	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 	        result = Integer.parseInt(bufferedReader.readLine());
 		} catch (Exception e) {
-			return -1;
+			return rand.nextInt(maxRandom);
 		}
 		
 		return result;
