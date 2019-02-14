@@ -4,6 +4,7 @@ public class Account {
 	
 	private static Account instance = null;
 	private String[] bannedWords;
+	private String translateAPI;
 	private String token;
 	private String prefix;
 	private String owner;
@@ -11,9 +12,10 @@ public class Account {
 	private Account() {
 		bannedWords = new String[] {};
 	    token = "";
+	    translateAPI = "";
 		owner = "";
 	    prefix = "";
-	} 
+	}
 	
 	public static Account getInstance() { 
 	    if (instance == null) instance = new Account(); 
@@ -30,6 +32,10 @@ public class Account {
 	
 	public String getOwnerID() {
 		return owner;
+	}
+	
+	public String getTranslateKey() {
+		return translateAPI;
 	}
 	
 	public String[] getWords() {

@@ -104,6 +104,9 @@ public class BotEventListener extends ListenerAdapter{
 				case "ping": thread = new Thread(new Ping(event)); break;
 				case "roulette": thread = new Thread(new Roulette(event)); break;
 				case "say": thread = new Thread(new Say(event)); break;
+				case "dice": thread = new Thread(new Dice(event)); break;
+				case "lock": thread = new Thread(new Lock(event)); break;
+				case "translate": thread = new Thread(new Translate(event)); break;
 				default: thread = null;
 			}
 			

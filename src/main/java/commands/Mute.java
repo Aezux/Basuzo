@@ -3,6 +3,7 @@ package commands;
 import java.util.List;
 
 import util.Embed;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -20,12 +21,21 @@ public class Mute implements Runnable {
 
 	@Override
 	public void run() {
+
 		Message msg = event.getMessage();
 		String author = event.getAuthor().getAsMention();
 		List<Member> mentioned = event.getMessage().getMentionedMembers();
 		List<Role> roles = event.getGuild().getRolesByName("mute", true);
 		String timePeriod;
 		int number;
+		
+		if (!event.getGuild().getMemberById(event.getAuthor().getId()).hasPermission(Permission.MANAGE_ROLES)) {
+			String errorMsg = new StringBuilder(event.getAuthor().getAsMention().toString())
+					.append(" you don't have the permission to use that command.").toString();			
+			MessageEmbed error = Embed.getInstance().error(errorMsg);
+			event.getChannel().sendMessage(error).complete();
+			return;
+		}
 		
 		if (mentioned.isEmpty()) {
 			String embedMsg = new StringBuilder(author)

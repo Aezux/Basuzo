@@ -49,6 +49,7 @@ public class Delete implements Runnable {
 					.append(" you don't have the permission to use that command.").toString();			
 			MessageEmbed error = Embed.getInstance().error(msg);
 			event.getChannel().sendMessage(error).complete();
+			return;
 		}
 
 	}
