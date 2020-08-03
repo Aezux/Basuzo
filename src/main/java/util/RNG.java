@@ -16,6 +16,8 @@ public class RNG {
 	}
 	
 	public int generateNumber(int maxRandom) {
+		System.out.println(maxRandom);
+		if (maxRandom <= 0) return 0;
 		return rand.nextInt(maxRandom);
 	}
 
