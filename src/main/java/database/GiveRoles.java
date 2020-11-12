@@ -1,7 +1,7 @@
 package database;
 
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 
 public class GiveRoles implements Runnable {
 	
@@ -20,7 +20,7 @@ public class GiveRoles implements Runnable {
 			String[] roles = db.getRoles(server, user).split(",");
 			for (String role : roles) {
 				Role guildRole = event.getGuild().getRoleById(role);
-				event.getGuild().getController().addSingleRoleToMember(event.getMember(), guildRole).queue();
+				event.getGuild().addRoleToMember(event.getMember(), guildRole).queue();
 			}
 		}
 	}

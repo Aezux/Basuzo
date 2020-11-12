@@ -13,14 +13,17 @@ public class Database {
 	private final String pass;
 
 	public Database() {
-		final String host = "";
-		final String database = "";
+		final String host = "192.168.1.64";
+		final String database = "Servers";	
 		jdbc = new StringBuilder("jdbc:mysql://")
-				.append(host).append(":3306/").append(database).toString();
-		user = "";
-		pass = "";
+				.append(host).append(":3306/").append(database)
+				.append("?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC")
+				.toString();
+
+		user = "basuzo";
+		pass = "discord";
 	}
-	
+
 	public void createTable(String tableName) {
 		try {
 			Connection connection = DriverManager.getConnection(jdbc, user, pass);

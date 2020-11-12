@@ -3,12 +3,12 @@ package commands;
 import java.util.List;
 
 import util.Embed;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Mute implements Runnable {
 	
@@ -94,9 +94,9 @@ public class Mute implements Runnable {
 				return;
 		}
 		
-		event.getGuild().getController().addSingleRoleToMember(mentioned.get(0), roles.get(0)).complete();
+		event.getGuild().addRoleToMember(mentioned.get(0), roles.get(0)).complete();
 		String muteMsg = new StringBuilder(mentioned.get(0).getAsMention())
-				.append(" has been muted.").toString();
+				.append(" has been punished by daddy UwU\nThey are now in time out.").toString();
 		MessageEmbed muteEmbed = Embed.getInstance().status(muteMsg);
 		event.getChannel().sendMessage(muteEmbed).complete();
 		
@@ -107,9 +107,9 @@ public class Mute implements Runnable {
 		}
 
 		if (mentioned.get(0).getRoles().contains(roles.get(0))) {
-			event.getGuild().getController().removeSingleRoleFromMember(mentioned.get(0), roles.get(0)).complete();
+			event.getGuild().removeRoleFromMember(mentioned.get(0), roles.get(0)).complete();
 			String embedMsg = new StringBuilder(mentioned.get(0).getAsMention())
-					.append(" has been unmuted.").toString();
+					.append(" is no longer in a time out.").toString();
 			MessageEmbed embed = Embed.getInstance().status(embedMsg);
 			event.getChannel().sendMessage(embed).complete();
 		}

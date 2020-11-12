@@ -1,8 +1,8 @@
 package database;
 
 import java.util.List;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleAddEvent;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 
 public class AddRole implements Runnable {
 	
@@ -15,8 +15,10 @@ public class AddRole implements Runnable {
 	public void run() {
 		Database db = new Database();
 		String server = event.getGuild().getName().replaceAll("[^a-zA-Z0-9]+","");
-		String user = event.getMember().getUser().getId();
+		String user = event.getMember().getId();
+
 		List<Role> roles = event.getMember().getRoles();
+		
 		StringBuilder stringBuilder = new StringBuilder();
 
 		for (int i=0; i<roles.size(); i++) {

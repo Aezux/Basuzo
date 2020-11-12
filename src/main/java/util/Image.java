@@ -20,7 +20,7 @@ public class Image {
 	}
 	
 	public String getImage(String subreddit) {
-		
+
 		String reddit = new StringBuilder("https://imgur.com/r/")
 				.append(subreddit).append("/hot.json").toString();
 		
@@ -45,10 +45,11 @@ public class Image {
 			int rng = RNG.getInstance().generateNumber(data.size());
 			
 			JSONObject image = (JSONObject)data.get(rng);
-			
+
 			return new StringBuilder("https://imgur.com/")
 					.append(image.get("hash")).append(image.get("ext")).toString();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 

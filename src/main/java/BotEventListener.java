@@ -5,26 +5,18 @@ import database.*;
 import util.Account;
 import util.Embed;
 import util.WordDetection;
-import net.dv8tion.jda.core.entities.Emote;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.ReadyEvent;
-import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleAddEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleRemoveEvent;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.entities.Emote;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleRemoveEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class BotEventListener extends ListenerAdapter{
-	
-	/* Bot is turned on */
-	public void onReady(ReadyEvent event) {
-		Game game = Game.playing("~help: view commands!");
-		event.getJDA().getPresence().setGame(game);
-	}
 	
 	/* Bot joins the server */
 	public void onGuildJoin(GuildJoinEvent event) {
@@ -35,38 +27,41 @@ public class BotEventListener extends ListenerAdapter{
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
     	String user = event.getUser().getAsMention();
     	String guild = event.getGuild().getName();
+
     	String msg = new StringBuilder("Lets all welcome **")
     			.append(user).append("** to ").append(guild).toString();
-    	
+    	    	
     	List<TextChannel> general = event.getGuild().getTextChannelsByName("general", true);
+
     	Emote emote = event.getJDA().getGuildsByName("BotIcons", false).get(0).getEmotesByName("hello", true).get(0);
     	MessageEmbed embed = Embed.getInstance().status(msg);
     	
-    	TextChannel channel;
-    	if (general.isEmpty()) channel = event.getGuild().getDefaultChannel();
-    	else channel = general.get(0);
-    	
-    	channel.sendMessage(embed).complete()
-    		.addReaction(emote).complete();
-    	new Thread(new GiveRoles(event)).start();
+    	if (general.isEmpty()) return;
+    	else {
+    		general.get(0).sendMessage(embed).complete()
+    			.addReaction(emote).complete();
+    		new Thread(new GiveRoles(event)).start();
+    	}
     }
     
     /* Member leaves the server */
-    public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
+    public void onGuildMemberRemove(GuildMemberRemoveEvent event) {
     	String user = event.getUser().getAsMention();
+    	
     	String msg = new StringBuilder("**")
     			.append(user).append("** is no longer part of this server").toString();
     	
     	List<TextChannel> general = event.getGuild().getTextChannelsByName("general", true);
+    	
     	Emote emote = event.getJDA().getGuildsByName("BotIcons", false).get(0).getEmotesByName("respects", true).get(0);
     	MessageEmbed embed = Embed.getInstance().status(msg);
     	
-    	TextChannel channel;
-    	if (general.isEmpty()) channel = event.getGuild().getDefaultChannel();
-    	else channel = general.get(0);
     	
-    	channel.sendMessage(embed).complete()
-    		.addReaction(emote).complete();
+    	if (general.isEmpty()) return;
+    	else {
+    		general.get(0).sendMessage(embed).complete()
+				.addReaction(emote).complete();
+    	}
     }
     
     /* Member gets a role */

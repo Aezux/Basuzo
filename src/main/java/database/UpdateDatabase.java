@@ -1,10 +1,10 @@
 package database;
 
 import java.util.List;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import util.Account;
 
 public class UpdateDatabase implements Runnable {
@@ -16,7 +16,8 @@ public class UpdateDatabase implements Runnable {
 
 	@Override
 	public void run() {
-
+		
+		event.getMessage().delete().complete();
 		if (!event.getAuthor().getId().equals(Account.getInstance().getOwnerID())) return;
 		
 		Database db = new Database();

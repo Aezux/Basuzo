@@ -1,8 +1,11 @@
 
 import javax.security.auth.login.LoginException;
 import util.Account;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 public class Main {
 	
@@ -12,7 +15,11 @@ public class Main {
 		JDA bot = null;
 		
 		try {
-			bot = new JDABuilder(token).build();
+			JDABuilder builder = JDABuilder.createDefault(token);
+			builder.setActivity(Activity.listening("~help"));
+			builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
+			builder.setMemberCachePolicy(MemberCachePolicy.ALL);
+			bot = builder.build();
 		} catch (LoginException e) {
 			e.printStackTrace();
 		} finally {

@@ -1,8 +1,8 @@
 package util;
 
 import java.util.List;
-import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class WordDetection implements Runnable {
 
